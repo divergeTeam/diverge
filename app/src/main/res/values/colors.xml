@@ -18,9 +18,9 @@
   -->
 
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#2eba93</color>
+    <color name="colorPrimaryDark">#059B71</color>
+    <color name="colorAccent">#2eba93</color>
     <color name="navigationBarColor">@android:color/black</color>
 
     <!-- Hardcode the colors so it doesn't change every time an Android System overlay changes -->

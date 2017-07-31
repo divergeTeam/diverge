@@ -17,12 +17,12 @@
   -->
 
 <resources>
-    <string name="app_name" translatable="false">substratum</string>
-    <string name="legacy_app_name" translatable="false">substratum legacy</string>
-    <string name="samsung_app_name" translatable="false">substratum samsung</string>
+    <string name="app_name" translatable="false">diverge</string>
+    <string name="legacy_app_name" translatable="false">diverge legacy</string>
+    <string name="samsung_app_name" translatable="false">diverge samsung</string>
     <string name="debug_app_name" translatable="false">debugger</string>
     <string name="showcase">showcase</string>
-    <string name="drawer_name" translatable="false">projekt substratum</string>
+    <string name="drawer_name" translatable="false">diverge</string>
 
     <string name="android">Android version:</string>
     <string name="device">Device model:</string>
@@ -74,7 +74,7 @@
 
     <string name="on_demand_updating_title">Resource Cache Initializer</string>
     <string name="on_demand_updating_text">%s\'s cache is now rebuilding&#8230;</string>
-    <string name="background_updating_toast">Substratum is getting a theme ready in the background,
+    <string name="background_updating_toast">diverge is getting a theme ready in the background,
         please wait for this to finish!
     </string>
     <string name="background_needs_invalidating">Oops! A corruption in the cache has occurred.</string>
@@ -84,7 +84,7 @@
         before it is functional!
     </string>
     <string name="background_updated_toast_rejected">Could not create resource cache for this theme!</string>
-    <string name="background_updated_toast_cleaning">Substratum is now clearing up this theme\'s
+    <string name="background_updated_toast_cleaning">diverge is now clearing up this theme\'s
         resource cache&#8230;</string>
     <string name="failed_to_install_title_notification">Failed to install OMS theme</string>
     <string name="failed_to_install_text_notification">%s failed to install</string>
@@ -116,7 +116,7 @@
     <string name="open_gapps_link" translatable="false">http://opengapps.org/</string>
 
     <string name="warning_title">WARNING!</string>
-    <string name="dangerous_warning_content">Substratum has detected that it is running on a
+    <string name="dangerous_warning_content">diverge has detected that it is running on a
         BOOTLOOP-KNOWN FIRMWARE (Update between November 2016 and January 2017, N/N-MR1) and is
         strongly advising against applying any framework/Android System overlays.\n\nIf you choose
         to continue and end up in a bootloop, please flash the rescue archive found in
@@ -220,29 +220,29 @@
     <string name="sounds_default_spinner">please select a sound pack&#8230;</string>
     <string name="sounds_dialog_permissions_title">Ringtones Configuration Alert</string>
     <string name="sounds_dialog_permissions_text">Alarms/Notifications/Ringtones are now selectable
-        from Settings manually!\n\nHowever, Substratum cannot grant itself
+        from Settings manually!\n\nHowever, diverge cannot grant itself
         "android.permission.WRITE_SETTINGS", so it is not able to set them as your current sounds
         automatically.\n\nBy clicking grant, a new window will launch to request the \'Allow modify
         system settings\' permission, so that you would not have this issue in the future.
     </string>
     <string name="sounds_dialog_permissions_deny">Deny</string>
     <string name="sounds_dialog_permissions_grant">Grant</string>
-    <string name="sounds_dialog_permissions_grant_toast">To reset all sounds set by Substratum, you
+    <string name="sounds_dialog_permissions_grant_toast">To reset all sounds set by diverge, you
         must enable \'Allow modify system settings\'.
     </string>
-    <string name="fonts_dialog_permissions_grant_toast">To reset all fonts set by Substratum, you
+    <string name="fonts_dialog_permissions_grant_toast">To reset all fonts set by diverge, you
         must enable \'Allow modify system settings\'.
     </string>
-    <string name="fonts_dialog_permissions_grant_toast2">To let Substratum control your system
+    <string name="fonts_dialog_permissions_grant_toast2">To let diverge control your system
         fonts, you must enable \'Allow modify system settings\'.
     </string>
 
     <string name="error_loading_pack">it seems like this pack was not set up
         correctly&#8230;</string>
 
-    <string name="content_resolver_alarm_metadata">Substratum Theme Alarm</string>
-    <string name="content_resolver_notification_metadata">Substratum Theme Notification</string>
-    <string name="content_resolver_ringtone_metadata">Substratum Theme Ringtone</string>
+    <string name="content_resolver_alarm_metadata">diverge Theme Alarm</string>
+    <string name="content_resolver_notification_metadata">diverge Theme Notification</string>
+    <string name="content_resolver_ringtone_metadata">diverge Theme Ringtone</string>
 
     <string name="sounds_alarm">Alarm</string>
     <string name="sounds_notification">Notification</string>
@@ -251,7 +251,7 @@
     <string name="sounds_lock_sound">Screen Lock Sounds</string>
     <string name="sounds_unlock_sound">Screen Unlock Sounds</string>
 
-    <string name="settings_about_substratum">substratum version</string>
+    <string name="settings_about_substratum">diverge version</string>
     <string name="settings_about_interfacer">interfacer version</string>
     <string name="settings_about_interfacer_not_installed">Not installed</string>
     <string name="settings_about_interfacer_masquerade">This rom requires an update to utilize interfacer functionality</string>
@@ -314,11 +314,11 @@
     <string name="accept">Accept</string>
     <string name="deny">Deny</string>
     <string name="permission_explanation_title">Permissions Overview</string>
-    <string name="permission_explanation_text">Substratum may not function as expected without these
-        few crucial permissions granted.\n\n<b>Storage: </b> Substratum needs to utilize your
+    <string name="permission_explanation_text">diverge may not function as expected without these
+        few crucial permissions granted.\n\n<b>Storage: </b> diverge needs to utilize your
         internal storage to store your system rescue archives, located in
-        /storage/emulated/0/substratum/.\n\n<b>Firebase: </b>
-        Substratum utilizes Google\'s Firebase to download crucial information from our
+        /storage/emulated/0/diverge/.\n\n<b>Firebase: </b>
+        diverge utilizes Google\'s Firebase to download crucial information from our
         centralized real-time database to improve core services and security enhancements.
     </string>
 
@@ -366,7 +366,7 @@
         Do you want to restore the current icons back to the system default icons?
     </string>
     <string name="studio_refresh_dialog_title">Configuration Change Confirmation</string>
-    <string name="studio_refresh_dialog_content">Substratum will now change your system
+    <string name="studio_refresh_dialog_content">diverge will now change your system
         configuration to quickly cause all applications to recognize new icons.\n\nYour system
         language will momentarily turn Japanese after being kicked to your launcher, then return
         back to the original language set on your device. If the icons do not change, click on
@@ -374,12 +374,12 @@
         touch your device until a message comes up saying that it has successfully applied your icon
         pack!</string>
     <string name="studio_pack_title">Downloaded Icon Packs</string>
-    <string name="studio_system_title">Substratum Framework</string>
+    <string name="studio_system_title">diverge Framework</string>
     <string name="studio_apply_confirmation">Are you sure you would like to apply %s?</string>
     <string name="studio_applying">Loading&#8230;</string>
     <string name="icon_pack_entry">Overlay Icon</string>
     <string name="studio_update_configuration">Refresh Icon Configuration</string>
-    <string name="studio_placeholder_text">no substratum supported icon packs found</string>
+    <string name="studio_placeholder_text">no diverge supported icon packs found</string>
     <string name="studio_toast_mask">This icon is being drawn from your current pack and
         will be changed when you apply this icon pack.
     </string>
@@ -399,7 +399,7 @@
         like to see if you could help me resolve this issue.
     </string>
     <string name="logcat_attachment_body" formatted="false" translatable="false">
-        Device:\n%s\n\nROM:\n%s\n\nSubstratum Version:\n%s\n\nTheme Version:\n%s\n\nTarget Package(s):\n%s\nReport:\n%s
+        Device:\n%s\n\nROM:\n%s\n\ndiverge Version:\n%s\n\nTheme Version:\n%s\n\nTarget Package(s):\n%s\nReport:\n%s
     </string>
     <string name="logcat_email_activity">Send bug report using&#8230;</string>
     <string name="logcat_email_activity_error">There are no email clients installed.</string>
@@ -430,7 +430,7 @@
 
     <string name="backup">Backup Card</string>
     <string name="backup_card_content">This function makes a copy of your currently enabled overlays
-        list and places it in \"/storage/emulated/0/substratum/profiles/\" for safekeeping.
+        list and places it in \"/storage/emulated/0/diverge/profiles/\" for safekeeping.
     </string>
     <string name="delete_dialog_okay">Delete</string>
     <string name="delete_dialog_title">Delete profile</string>
@@ -460,7 +460,7 @@
     <string name="profile_edittext_title">New Profile:</string>
     <string name="profile_edittext_whitespace_warning_toast">Cannot use whitespace inside profile name!</string>
     <string name="toast_backup_success">Current overlay list saved to
-        \"/storage/emulated/0/substratum/profiles/%s\"
+        \"/storage/emulated/0/diverge/profiles/%s\"
     </string>
     <string name="spinner_default_item">select a profile&#8230;</string>
 
@@ -468,7 +468,7 @@
     <string name="fab_menu_select_to_toggle_all_overlays">Select all overlays</string>
 
     <string name="permission_not_granted_dialog_title">Permissions not granted</string>
-    <string name="permission_not_granted_dialog_message1">Please grant substratum storage
+    <string name="permission_not_granted_dialog_message1">Please grant diverge storage
         permissions
         or the app will not function properly!
     </string>
@@ -509,8 +509,7 @@
     <string name="toast_samsung_prototype_alert">Substratum automatically hid unsupported system overlays for your device!</string>
     <string name="samsung_prototype_no_root_dialog">It seems that you are on a supported Samsung device, an addon was released to support this!</string>
     <string name="samsung_prototype_no_root_dialog_button">Download now!</string>
-
-    <string name="toast_needs_caching">Substratum\'s cache was wiped, please rebuild this theme before continuing!</string>
+    <string name="toast_needs_caching">diverge\'s cache was wiped, please rebuild this theme before continuing!</string>
 
     <string name="notification_theme_installed">installed</string>
     <string name="notification_theme_updated">updated</string>
@@ -519,7 +518,7 @@
 
     <string name="notification_hide">Dismiss</string>
     <string name="notification_hide_upgrade">Cancel</string>
-    <string name="notification_initial_title">Substratum is running</string>
+    <string name="notification_initial_title">diverge is running</string>
     <string name="notification_initial_title_upgrade_intent">Upgrading %s\'s overlays&#8230;</string>
     <string name="notification_initial_title_upgrade">%s resources are now upgrading&#8230;</string>
     <string name="notification_done_title">Theme compilation has completed</string>
@@ -550,8 +549,8 @@
     <string name="settings_title_2">Overlay List</string>
     <string name="settings_title_3">Theming</string>
     <string name="settings_title_clickable">System Preferences</string>
-    <string name="substratum_cache_clear_initial_toast">Substratum\'s cache is now being wiped&#8230;</string>
-    <string name="substratum_restart_toast">Substratum restarted automatically after a settings change.</string>
+    <string name="substratum_cache_clear_initial_toast">diverge\'s cache is now being wiped&#8230;</string>
+    <string name="substratum_restart_toast">diverge restarted automatically after a settings change.</string>
     <string name="purge_cache">Invalidate Theme Cache</string>
     <string name="purge_cache_subtext">This will destroy all stored theme and application cache.</string>
     <string name="restart_systemui">Post-enable SystemUI recreate</string>
@@ -573,18 +572,18 @@
     <string name="disable_completion">All overlays for this theme are now deactivating&#8230;</string>
     <string name="enable_completion">All installed overlays for this theme are now activating&#8230;</string>
     <string name="dynamic_actionbar_colors">Dynamic Action Bar Colors</string>
-    <string name="dynamic_actionbar_colors_subtext">In the theme information window, Substratum will adapt the collapsible action bar to the hero image\'s dominating color.</string>
+    <string name="dynamic_actionbar_colors_subtext">In the theme information window, diverge will adapt the collapsible action bar to the hero image\'s dominating color.</string>
     <string name="dynamic_navbar_colors">Dynamic Navigation Bar Colors</string>
-    <string name="dynamic_navbar_colors_subtext">In the theme information window, Substratum will adapt the navigation bar to the hero image\'s dominating color.</string>
+    <string name="dynamic_navbar_colors_subtext">In the theme information window, diverge will adapt the navigation bar to the hero image\'s dominating color.</string>
     <string name="manager_title">Show disabled overlays in the list</string>
     <string name="manager_subtext">In the overlay list window, show all disabled overlays with their enabled counterparts.</string>
     <string name="alternate_drawer_design_title">Secondary Drawer Design</string>
     <string name="alternate_drawer_design_subtext">Uses an alternate navigation drawer design when navigating through the user interface.</string>
     <string name="logchar_autosave_title">Automatically save LogChar reports</string>
-    <string name="logchar_autosave_subtext">This will automatically save LogChar reports in /storage/emulated/0/substratum/LogChar Reports/.</string>
+    <string name="logchar_autosave_subtext">This will automatically save LogChar reports in /storage/emulated/0/diverge/LogChar Reports/.</string>
 
     <string name="show_outdated_themes_title">Show all outdated themes</string>
-    <string name="show_outdated_themes_content">Disabling this would allow Substratum to utilize
+    <string name="show_outdated_themes_content">Disabling this would allow diverge to utilize
         the brand new algorithm where themes get loaded up much faster than usual. This will only
         work for properly configured 6.0.0+ plugin themes.</string>
 
@@ -597,7 +596,7 @@
     <string name="fab_menu_swap_toggle">Disable other themes</string>
     <string name="fab_menu_swap_toggle_legacy">Remove all existing</string>
 
-    <string name="team_title_one">Leaders of Substratum</string>
+    <string name="team_title_one">Leaders of substratum</string>
     <string name="team_text_one">Not only did we create something that works for the users, but we worked in conjunction with themers to make it a wonderful theming engine for the community!</string>
 
     <string name="team_title_two">Substratum Translators</string>
@@ -635,7 +634,7 @@
     <string name="team_char_description">Community Organization &amp; Support</string>
     <string name="team_char_link" translatable="false">https://plus.google.com/+CharG</string>
 
-    <string name="slide_1_title">welcome to substratum</string>
+    <string name="slide_1_title">welcome to diverge</string>
     <string name="slide_1_text">a minimal yet powerful theme engine based on Sony\'s overlay manager service</string>
     <string name="slide_2_title">a brand new user interface</string>
     <string name="slide_2_text">do you love your themes? introducing a gorgeous card view interface to showcase each of your theme\'s preview images installed on your device!</string>
@@ -646,7 +645,7 @@
     <string name="slide_5_title">while compiling your overlays&#8230;</string>
     <string name="slide_5_text">you can switch over to your own apps and allow the overlays to compile in the background as this process may take a while. just check your notification panel for the progress!</string>
     <string name="slide_6_title">we hope you enjoy our creation!</string>
-    <string name="slide_6_text">thank you for reading the introduction and we hope you enjoy using substratum as much as we did while developing for it!</string>
+    <string name="slide_6_text">thank you for reading the introduction and we hope you enjoy using diverge as much as we did while developing for it!</string>
 
     <string name="scheduled_night_profile">Scheduled Contextual Profiles</string>
     <string name="scheduled_profile_card_content">This function gives you the possibility to automatically switch between profiles based on the time of day.</string>
@@ -680,7 +679,7 @@
     <string name="break_compilation_dialog_continue">Continue</string>
 
     <string name="theme_safety_dialog_title">WARNING</string>
-    <string name="theme_safety_dialog_content">This is a crucial safety feature to recover you from bad overlay force closes! You can use the Rescue Me! button on Substratum\'s app shortcut if you find yourself stuck, or your final resort would be to flash the rescue archives found in /storage/emulated/0/substratum/.</string>
+    <string name="theme_safety_dialog_content">This is a crucial safety feature to recover you from bad overlay force closes! You can use the Rescue Me! button on diverge\'s app shortcut if you find yourself stuck, or your final resort would be to flash the rescue archives found in /storage/emulated/0/diverge/.</string>
 
     <string name="profile_dialog_title">select the items you want to backup</string>
     <string name="profile_no_selection_warning">Please select at least one option!</string>
@@ -704,11 +703,11 @@
     <string name="settings_title_automation">Automation</string>
 
     <string name="settings_auto_updater_title">Automatically update target overlays</string>
-    <string name="settings_auto_updater_text">Substratum will automatically build, compile and install an updated version of all overlays for the recently updated apps. Keeping this disabled will save battery.</string>
+    <string name="settings_auto_updater_text">diverge will automatically build, compile and install an updated version of all overlays for the recently updated apps. Keeping this disabled will save battery.</string>
 
     <string name="settings_theme_auto_updater_title">Automatically update theme overlays (BETA)</string>
     <string name="settings_theme_auto_updater_dialog_title">WARNING</string>
-    <string name="settings_theme_auto_updater_text">Substratum will automatically build, compile and install an updated version of all overlays for the recently updated theme. Keeping this disabled will save battery.</string>
+    <string name="settings_theme_auto_updater_text">diverge will automatically build, compile and install an updated version of all overlays for the recently updated theme. Keeping this disabled will save battery.</string>
     <string name="settings_theme_auto_updater_dialog_text">Please do NOT have PackageInstaller open in the foreground while the notification is up, framework overlays tend to restart PackageInstaller causing indefinite amounts of recompiling!</string>
 
     <string name="settings_auto_alert_title">New installable overlay found alert</string>
@@ -747,9 +746,9 @@
     <string name="per_app_dialog_title">%s\n overlay configurator</string>
     <string name="per_app_apply">Apply</string>
     <string name="per_app_request_title">FloatUI Permissions</string>
-    <string name="per_app_draw_over_other_apps_request">Please grant Substratum "draw over other apps" for the floating UI and "Usage stats" permissions to access the foreground app for matching theme targets.</string>
-    <string name="per_app_usage_stats_request">Please grant Substratum "usage access" permissions to access the foreground app for matching theme targets.</string>
-    <string name="per_app_manual_grant">Please manually grant Substratum "usage access" permissions and "draw over other apps" in App Settings to use FloatUI!</string>
+    <string name="per_app_draw_over_other_apps_request">Please grant diverge "draw over other apps" for the floating UI and "Usage stats" permissions to access the foreground app for matching theme targets.</string>
+    <string name="per_app_usage_stats_request">Please grant diverge "usage access" permissions to access the foreground app for matching theme targets.</string>
+    <string name="per_app_manual_grant">Please manually grant diverge "usage access" permissions and "draw over other apps" in App Settings to use FloatUI!</string>
 
     <string name="notification_overlay_found_specific" formatted="false">An overlay for %s is in %s!</string>
     <string name="notification_overlay_found_description">You can open the theme by clicking on this notification!</string>
@@ -782,7 +781,7 @@
     <string name="restore_icons_summary">This function removed the previously applied icon pack and restores the stock icons.\n</string>
     <string name="restore_icons_button">Restore icons</string>
 
-    <string name="interfacer_not_authorized_toast">This version of Substratum is not authorized and will not work with the system Interfacer module.</string>
+    <string name="interfacer_not_authorized_toast">This version of diverge is not authorized and will not work with the system Interfacer module.</string>
 
     <string name="app_crash_title">%s keeps stopping&#8230;</string>
     <string name="app_crash_content">All enabled overlays for this app have been disabled.</string>
@@ -850,10 +849,10 @@
     <string name="manage_space_cache_text_title">Clear cache</string>
     <string name="manage_space_logs_text_title">Clear saved logs</string>
     <string name="clear_cache_button_loading">Loading&#8230;</string>
-    <string name="clear_cache_button_text">Clear substratum cache</string>
+    <string name="clear_cache_button_text">Clear diverge cache</string>
     <string name="manage_space_cache_counter_title">Clearing the local cache will remove all the files used by the theme compiler and online downloader. All theme packs and user configurations will remain as-is.\n\nDepending on the size of your cache, this may take a few seconds to complete.</string>
     <string name="manage_space_reset_text_title">Reset configuration</string>
-    <string name="manage_space_reset_text_desc">Are you having trouble with the application? Or did you recently make a big version leap from an old version of substratum? A simple configuration clear would definitely aid troubleshooting the issue!</string>
+    <string name="manage_space_reset_text_desc">Are you having trouble with the application? Or did you recently make a big version leap from an old version of diverge? A simple configuration clear would definitely aid troubleshooting the issue!</string>
     <string name="manage_space_reset_dialog_title">Reset configuration?</string>
     <string name="manage_space_reset_dialog_content">The app will close after reset is complete!</string>
     <string name="automatic_logchar_cleanup_summary_on">Saved LogChar reports will be wiped every fifteen days</string>

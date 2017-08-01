@@ -38,7 +38,7 @@ android {
 
     android.applicationVariants.all { variant ->
         variant.outputs.all {
-            outputFileName = "substratum_beta_${variant.versionCode}_${gitHash()}.apk"
+            outputFileName = "diverge ${variant.versionName}.apk"
         }
     }
 
@@ -47,7 +47,7 @@ android {
         minSdkVersion 24
         targetSdkVersion 26
         versionCode 815
-        versionName "eight hundred fifteen"
+        versionName "Beta Eleven"
         buildConfigField "java.util.Date", "buildTime", "new java.util.Date(" + System.currentTimeMillis() + "L)"
         buildConfigField "String", "GIT_HASH", "\"${gitHash()}\""
     }
@@ -70,7 +70,7 @@ android {
         main {}
         preview {
             targetSdkVersion 26
-            versionNameSuffix " (target-preview)"
+            versionNameSuffix ""
         }
     }
 
@@ -91,6 +91,8 @@ android {
 }
 
 dependencies {
+    implementation 'com.android.support:design:26.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     compile fileTree(include: ['*.jar'], dir: 'libs')
     // Leak Checks and Test Cases
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'

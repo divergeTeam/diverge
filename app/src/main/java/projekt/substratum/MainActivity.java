@@ -44,7 +44,6 @@ import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.service.quicksettings.Tile;
 import android.support.annotation.NonNull;
-import android.support.design.widget.Lunchbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -54,6 +53,9 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.support.design.internal.BottomNavigationItemView;
+import android.support.design.internal.BottomNavigationMenuView;
+import android.support.design.widget.BottomNavigationView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -99,12 +101,9 @@ import projekt.substratum.common.platform.ThemeManager;
 import projekt.substratum.fragments.ManagerFragment;
 import projekt.substratum.fragments.PriorityListFragment;
 import projekt.substratum.fragments.PriorityLoaderFragment;
-import projekt.substratum.fragments.ProfileFragment;
 import projekt.substratum.fragments.RecoveryFragment;
 import projekt.substratum.fragments.SettingsFragment;
-import projekt.substratum.fragments.TeamFragment;
 import projekt.substratum.fragments.ThemeFragment;
-import projekt.substratum.fragments.TroubleshootingFragment;
 import projekt.substratum.services.floatui.SubstratumFloatInterface;
 import projekt.substratum.services.tiles.FloatUiTile;
 import projekt.substratum.util.files.Root;
@@ -311,7 +310,7 @@ public class MainActivity extends SubstratumActivity implements
 
         String versionName = BuildConfig.VERSION_NAME;
         if (BuildConfig.DEBUG) {
-            versionName = versionName + " - " + BuildConfig.GIT_HASH;
+            versionName = versionName;
         }
 
         AccountHeader header = new AccountHeaderBuilder()
@@ -341,160 +340,34 @@ public class MainActivity extends SubstratumActivity implements
         }
         drawerBuilder.withAccountHeader(header);
 
-
-        // Split the community chats out for easy adapting
-        ExpandableDrawerItem social = new ExpandableDrawerItem()
-                .withName(R.string.nav_drawer_community)
-                .withIcon(R.drawable.nav_drawer_community)
-                .withSelectable(false).withSubItems(
-                        new SecondaryDrawerItem().withName(R.string.nav_drawer_googleplus)
-                                .withLevel(2).withIcon(R.drawable.nav_drawer_googleplus)
-                                .withSelectable(false)
-                                .withIdentifier(100),
-                        new SecondaryDrawerItem().withName(R.string.nav_drawer_telegram)
-                                .withLevel(2).withIcon(R.drawable.nav_drawer_telegram)
-                                .withSelectable(false)
-                                .withIdentifier(101),
-                        new SecondaryDrawerItem().withName(R.string.nav_drawer_xda)
-                                .withLevel(2).withIcon(R.drawable.nav_drawer_xda)
-                                .withSelectable(false)
-                                .withIdentifier(102));
-
-        // Split the featured content out for easy adapting
-        ExpandableDrawerItem featured = new ExpandableDrawerItem()
-                .withName(R.string.nav_drawer_featured)
-                .withIcon(R.drawable.nav_drawer_featured)
-                .withSelectable(false).withSubItems(
-                        new SecondaryDrawerItem().withName(R.string.nav_drawer_rawad)
-                                .withLevel(2).withIcon(R.drawable.nav_drawer_youtube)
-                                .withSelectable(false)
-                                .withIdentifier(103),
-                        new SecondaryDrawerItem().withName(R.string.nav_drawer_tcf)
-                                .withLevel(2).withIcon(R.drawable.nav_drawer_tcf)
-                                .withSelectable(false)
-                                .withIdentifier(104),
-                        new SecondaryDrawerItem().withName(R.string.nav_drawer_xda_portal)
-                                .withLevel(2).withIcon(R.drawable.nav_drawer_xda_portal)
-                                .withSelectable(false)
-                                .withIdentifier(105));
-
-        // Split the resources out for easy adapting
-        ExpandableDrawerItem resources = new ExpandableDrawerItem()
-                .withName(R.string.nav_drawer_resources)
-                .withIcon(R.drawable.nav_drawer_resources)
-                .withSelectable(false).withSubItems(
-                        new SecondaryDrawerItem().withName(R.string.nav_drawer_homepage)
-                                .withLevel(2).withIcon(R.drawable.nav_drawer_homepage)
-                                .withSelectable(false)
-                                .withIdentifier(106),
-                        new SecondaryDrawerItem().withName(R.string.nav_drawer_template)
-                                .withLevel(2).withIcon(R.drawable.nav_drawer_template)
-                                .withSelectable(false)
-                                .withIdentifier(107),
-                        new SecondaryDrawerItem().withName(R.string.nav_drawer_gerrit)
-                                .withLevel(2).withIcon(R.drawable.nav_drawer_gerrit)
-                                .withSelectable(false)
-                                .withIdentifier(108),
-                        new SecondaryDrawerItem().withName(R.string.nav_drawer_github)
-                                .withLevel(2).withIcon(R.drawable.nav_drawer_github)
-                                .withSelectable(false)
-                                .withIdentifier(109));
-
         // Begin initializing the navigation drawer
         Boolean checkSamsungStatus = isSamsung(getApplicationContext());
         drawerBuilder.addDrawerItems(
                 new PrimaryDrawerItem()
-                        .withName(R.string.nav_home)
-                        .withIcon(R.drawable.nav_theme_packs)
-                        .withIdentifier(1));
-        drawerBuilder.addDrawerItems(
-                new PrimaryDrawerItem()
                         .withName(R.string.nav_overlays)
                         .withIcon(R.drawable.nav_overlays)
-                        .withIdentifier(2));
-        if (!checkSamsungStatus) drawerBuilder.addDrawerItems(
-                new PrimaryDrawerItem()
-                        .withName(R.string.nav_bootanim)
-                        .withIcon(R.drawable.nav_bootanim)
-                        .withIdentifier(3));
-        if (References.isFontsSupported() && !checkSamsungStatus)
-            drawerBuilder.addDrawerItems(
-                    new PrimaryDrawerItem()
-                            .withName(R.string.nav_fonts)
-                            .withIcon(R.drawable.nav_fonts)
-                            .withIdentifier(4));
-        if (!checkSamsungStatus) drawerBuilder.addDrawerItems(
-                new PrimaryDrawerItem()
-                        .withName(R.string.nav_sounds)
-                        .withIcon(R.drawable.nav_sounds)
-                        .withIdentifier(5));
-        drawerBuilder.addDrawerItems(
-                new PrimaryDrawerItem()
-                        .withName(R.string.nav_wallpapers)
-                        .withIcon(R.drawable.nav_wallpapers)
-                        .withIdentifier(6));
-        drawerBuilder.addDrawerItems(
-                new SectionDrawerItem()
-                        .withName(R.string.nav_section_header_utilities));
+                        .withIdentifier(1));
         drawerBuilder.addDrawerItems(
                 new PrimaryDrawerItem()
                         .withName(R.string.nav_overlay_manager)
                         .withIcon(R.drawable.nav_overlay_manager)
-                        .withIdentifier(7));
-        if (References.checkThemeInterfacer(getApplicationContext()) &&
-                References.isAuthorizedDebugger(getApplicationContext()) &&
-                !checkSamsungStatus)
-            drawerBuilder.addDrawerItems(
-                    new PrimaryDrawerItem()
-                            .withName(R.string.nav_studio)
-                            .withIcon(R.drawable.nav_drawer_studio)
-                            .withSelectable(false)
-                            .withIdentifier(8));
+                        .withIdentifier(2));
         if (References.checkOMS(getApplicationContext()) && !checkSamsungStatus)
             drawerBuilder.addDrawerItems(
                     new PrimaryDrawerItem()
                             .withName(R.string.nav_priorities)
                             .withIcon(R.drawable.nav_drawer_priorities)
-                            .withIdentifier(9));
-        if (!checkSamsungStatus) drawerBuilder.addDrawerItems(
-                new PrimaryDrawerItem()
-                        .withName(R.string.nav_backup_restore)
-                        .withIcon(R.drawable.nav_drawer_profiles)
-                        .withIdentifier(10));
+                            .withIdentifier(3));
         drawerBuilder.addDrawerItems(
                 new PrimaryDrawerItem()
                         .withName(R.string.nav_manage)
                         .withIcon(R.drawable.nav_manage)
-                        .withIdentifier(11));
-        drawerBuilder.addDrawerItems(
-                new SectionDrawerItem()
-                        .withName(R.string.nav_section_header_get_involved));
-        drawerBuilder.addDrawerItems(social);
-        drawerBuilder.addDrawerItems(featured);
-        drawerBuilder.addDrawerItems(resources);
-        drawerBuilder.addDrawerItems(
-                new PrimaryDrawerItem()
-                        .withName(R.string.nav_troubleshooting)
-                        .withIcon(R.drawable.nav_troubleshooting)
-                        .withIdentifier(12));
-        drawerBuilder.addDrawerItems(
-                new SectionDrawerItem()
-                        .withName(R.string.nav_section_header_more));
-        drawerBuilder.addDrawerItems(
-                new SecondaryDrawerItem()
-                        .withName(R.string.nav_team_contributors)
-                        .withIcon(R.drawable.nav_drawer_team)
-                        .withIdentifier(13));
-        drawerBuilder.addDrawerItems(
-                new SecondaryDrawerItem()
-                        .withName(getString(R.string.nav_opensource))
-                        .withIcon(R.drawable.nav_drawer_licenses)
-                        .withIdentifier(14));
+                        .withIdentifier(4));
         drawerBuilder.addDrawerItems(
                 new SecondaryDrawerItem()
                         .withName(R.string.nav_settings)
                         .withIcon(R.drawable.nav_drawer_settings)
-                        .withIdentifier(15));
+                        .withIdentifier(5));
         drawerBuilder.withOnDrawerItemClickListener((view, position, drawerItem) -> {
             if (drawerItem != null) {
                 switch ((int) drawerItem.getIdentifier()) {
@@ -509,201 +382,20 @@ public class MainActivity extends SubstratumActivity implements
                                 References.homeFragment);
                         break;
                     case 2:
-                        switchThemeFragment(getString(R.string.nav_overlays),
-                                References.overlaysFragment);
-                        break;
-                    case 3:
-                        switchThemeFragment(getString(R.string.nav_bootanim),
-                                References.bootAnimationsFragment);
-                        break;
-                    case 4:
-                        switchThemeFragment(getString(R.string.nav_fonts),
-                                References.fontsFragment);
-                        break;
-                    case 5:
-                        switchThemeFragment(getString(R.string.nav_sounds),
-                                References.soundsFragment);
-                        break;
-                    case 6:
-                        switchThemeFragment(getString(R.string.nav_wallpapers),
-                                References.wallpaperFragment);
-                        break;
-                    case 7:
                         switchFragment(getString(R.string.nav_overlay_manager),
                                 ManagerFragment.class.getCanonicalName());
                         break;
-                    case 8:
-                        Intent intent = new Intent(getApplicationContext(),
-                                StudioSelectorActivity.class);
-                        startActivity(intent);
-                        break;
-                    case 9:
+                    case 3:
                         switchFragment(getString(R.string.nav_priorities),
                                 PriorityLoaderFragment.class.getCanonicalName());
                         break;
-                    case 10:
-                        switchFragment(getString(R.string.nav_backup_restore),
-                                ProfileFragment.class.getCanonicalName());
-                        break;
-                    case 11:
+                    case 4:
                         switchFragment(getString(R.string.nav_manage),
                                 RecoveryFragment.class.getCanonicalName());
                         break;
-                    case 12:
-                        switchFragment(getString(R.string.nav_troubleshooting),
-                                TroubleshootingFragment.class.getCanonicalName());
-                        break;
-                    case 13:
-                        switchFragment(getString(R.string.nav_team_contributors),
-                                TeamFragment.class.getCanonicalName());
-                        break;
-                    case 14:
-                        switchFragmentToLicenses(getString(R.string.nav_opensource),
-                                fragment);
-                        break;
-                    case 15:
+                    case 5:
                         switchFragment(getString(R.string.nav_settings),
                                 SettingsFragment.class.getCanonicalName());
-                        break;
-                    case 100:
-                        try {
-                            String sourceURL = getString(R.string.googleplus_link);
-                            Intent i = new Intent(Intent.ACTION_VIEW);
-                            i.setData(Uri.parse(sourceURL));
-                            startActivity(i);
-                        } catch (Exception e) {
-                            Lunchbar.make(findViewById(android.R.id.content),
-                                    getString(R.string.activity_missing_toast),
-                                    Lunchbar.LENGTH_LONG)
-                                    .show();
-                        }
-                        break;
-                    case 101:
-                        try {
-                            String sourceURL;
-                            if (References.isSamsung(getApplicationContext())) {
-                                sourceURL = getString(R.string.telegram_link_samsung);
-                            } else {
-                                sourceURL = getString(R.string.telegram_link);
-                            }
-                            Intent i = new Intent(Intent.ACTION_VIEW);
-                            i.setData(Uri.parse(sourceURL));
-                            startActivity(i);
-                        } catch (Exception e) {
-                            Lunchbar.make(findViewById(android.R.id.content),
-                                    getString(R.string.activity_missing_toast),
-                                    Lunchbar.LENGTH_LONG)
-                                    .show();
-                        }
-                        break;
-                    case 102:
-                        try {
-                            String sourceURL;
-                            if (References.isSamsung(this)) {
-                                sourceURL = getString(R.string.xda_sungstratum_link);
-                            } else {
-                                sourceURL = getString(R.string.xda_link);
-                            }
-                            Intent i = new Intent(Intent.ACTION_VIEW);
-                            i.setData(Uri.parse(sourceURL));
-                            startActivity(i);
-                        } catch (Exception e) {
-                            Lunchbar.make(findViewById(android.R.id.content),
-                                    getString(R.string.activity_missing_toast),
-                                    Lunchbar.LENGTH_LONG)
-                                    .show();
-                        }
-                        break;
-                    case 103:
-                        try {
-                            String sourceURL = getString(R.string.rawad_youtube_url);
-                            Intent i = new Intent(Intent.ACTION_VIEW);
-                            i.setData(Uri.parse(sourceURL));
-                            startActivity(i);
-                        } catch (Exception e) {
-                            Lunchbar.make(findViewById(android.R.id.content),
-                                    getString(R.string.activity_missing_toast),
-                                    Lunchbar.LENGTH_LONG)
-                                    .show();
-                        }
-                        break;
-                    case 104:
-                        try {
-                            String sourceURL = getString(R.string.tcf_link);
-                            Intent i = new Intent(Intent.ACTION_VIEW);
-                            i.setData(Uri.parse(sourceURL));
-                            startActivity(i);
-                        } catch (Exception e) {
-                            Lunchbar.make(findViewById(android.R.id.content),
-                                    getString(R.string.activity_missing_toast),
-                                    Lunchbar.LENGTH_LONG)
-                                    .show();
-                        }
-                        break;
-                    case 105:
-                        try {
-                            String sourceURL = getString(R.string.xda_portal_link);
-                            Intent i = new Intent(Intent.ACTION_VIEW);
-                            i.setData(Uri.parse(sourceURL));
-                            startActivity(i);
-                        } catch (Exception e) {
-                            Lunchbar.make(findViewById(android.R.id.content),
-                                    getString(R.string.activity_missing_toast),
-                                    Lunchbar.LENGTH_LONG)
-                                    .show();
-                        }
-                        break;
-                    case 106:
-                        try {
-                            String sourceURL = getString(R.string.homepage_link);
-                            Intent i = new Intent(Intent.ACTION_VIEW);
-                            i.setData(Uri.parse(sourceURL));
-                            startActivity(i);
-                        } catch (Exception e) {
-                            Lunchbar.make(findViewById(android.R.id.content),
-                                    getString(R.string.activity_missing_toast),
-                                    Lunchbar.LENGTH_LONG)
-                                    .show();
-                        }
-                        break;
-                    case 107:
-                        try {
-                            String sourceURL = getString(R.string.template_link);
-                            Intent i = new Intent(Intent.ACTION_VIEW);
-                            i.setData(Uri.parse(sourceURL));
-                            startActivity(i);
-                        } catch (Exception e) {
-                            Lunchbar.make(findViewById(android.R.id.content),
-                                    getString(R.string.activity_missing_toast),
-                                    Lunchbar.LENGTH_LONG)
-                                    .show();
-                        }
-                        break;
-                    case 108:
-                        try {
-                            String sourceURL = getString(R.string.gerrit_link);
-                            Intent i = new Intent(Intent.ACTION_VIEW);
-                            i.setData(Uri.parse(sourceURL));
-                            startActivity(i);
-                        } catch (Exception e) {
-                            Lunchbar.make(findViewById(android.R.id.content),
-                                    getString(R.string.activity_missing_toast),
-                                    Lunchbar.LENGTH_LONG)
-                                    .show();
-                        }
-                        break;
-                    case 109:
-                        try {
-                            String sourceURL = getString(R.string.github_link);
-                            Intent i = new Intent(Intent.ACTION_VIEW);
-                            i.setData(Uri.parse(sourceURL));
-                            startActivity(i);
-                        } catch (Exception e) {
-                            Lunchbar.make(findViewById(android.R.id.content),
-                                    getString(R.string.activity_missing_toast),
-                                    Lunchbar.LENGTH_LONG)
-                                    .show();
-                        }
                         break;
                 }
             }

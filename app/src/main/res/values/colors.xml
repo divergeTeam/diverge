@@ -18,9 +18,9 @@
   -->
 
 <resources>
-    <color name="colorPrimary">#2eba93</color>
-    <color name="colorPrimaryDark">#059B71</color>
-    <color name="colorAccent">#2eba93</color>
+    <color name="colorPrimary">#059B71</color>
+    <color name="colorPrimaryDark">#006A4C</color>
+    <color name="colorAccent">#2EBA93</color>
     <color name="navigationBarColor">@android:color/black</color>
 
     <!-- Hardcode the colors so it doesn't change every time an Android System overlay changes -->
@@ -64,9 +64,9 @@
     <color name="sounds_spinner_background">@color/theme_information_background</color>
     <color name="sounds_window_background">@android:color/black</color>
 
-    <color name="backup_button">@color/colorPrimary</color>
+    <color name="backup_button">@color/colorAccent</color>
     <color name="backup_button_text_color">@android:color/white</color>
-    <color name="restore_button">@color/colorPrimary</color>
+    <color name="restore_button">@color/colorAccent</color>
     <color name="restore_button_text_color">@android:color/white</color>
 
     <color name="splashscreen_background">#fffafafa</color>
@@ -99,7 +99,7 @@
 
     <color name="material_drawer_icon_color">#ff000000</color>
     <color name="material_drawer_background">#ffffffff</color>
-    <color name="material_drawer_header_background">@color/colorPrimary</color>
+    <color name="material_drawer_header_background">@color/colorAccent</color>
 
     <color name="compile_dialog_wave_color">#c0ffffff</color>
 
@@ -127,7 +127,7 @@
     <color name="fab_background_color">@color/colorAccent</color>
 
     <color name="app_shortcut_icon_color">#ffffffff</color>
-    <color name="app_shortcut_icon_background_color">@color/colorPrimary</color>
+    <color name="app_shortcut_icon_background_color">@color/colorAccent</color>
 
-    <color name="main_launcher_background">#FAFAFA</color>
+    <color name="main_launcher_background">#ffffffff</color>
 </resources>

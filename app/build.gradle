@@ -47,7 +47,7 @@ android {
         minSdkVersion 24
         targetSdkVersion 26
         versionCode 815
-        versionName "Beta Eleven"
+        versionName "Beta Twelve"
         buildConfigField "java.util.Date", "buildTime", "new java.util.Date(" + System.currentTimeMillis() + "L)"
         buildConfigField "String", "GIT_HASH", "\"${gitHash()}\""
     }

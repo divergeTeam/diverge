@@ -44,18 +44,17 @@ import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.service.quicksettings.Tile;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.support.design.internal.BottomNavigationItemView;
-import android.support.design.internal.BottomNavigationMenuView;
-import android.support.design.widget.BottomNavigationView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -66,6 +65,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.diverge.TabPagerAdapter;
 import com.mikepenz.aboutlibraries.LibsBuilder;
 import com.mikepenz.aboutlibraries.ui.LibsSupportFragment;
 import com.mikepenz.materialdrawer.AccountHeader;
@@ -92,7 +92,6 @@ import java.util.concurrent.TimeUnit;
 import eightbitlab.com.blurview.BlurView;
 import eightbitlab.com.blurview.RenderScriptBlur;
 import projekt.substratum.activities.base.SubstratumActivity;
-import projekt.substratum.activities.showcase.ShowcaseActivity;
 import projekt.substratum.activities.studio.StudioSelectorActivity;
 import projekt.substratum.common.References;
 import projekt.substratum.common.commands.ElevatedCommands;
@@ -106,6 +105,7 @@ import projekt.substratum.fragments.SettingsFragment;
 import projekt.substratum.fragments.ThemeFragment;
 import projekt.substratum.services.floatui.SubstratumFloatInterface;
 import projekt.substratum.services.tiles.FloatUiTile;
+import projekt.substratum.tabs.Overlays;
 import projekt.substratum.util.files.Root;
 import projekt.substratum.util.helpers.ContextWrapper;
 import projekt.substratum.util.injectors.AOPTCheck;
@@ -119,6 +119,7 @@ import static projekt.substratum.common.References.SST_ADDON_PACKAGE;
 import static projekt.substratum.common.References.SUBSTRATUM_BUILDER_CACHE;
 import static projekt.substratum.common.References.SUBSTRATUM_LOG;
 import static projekt.substratum.common.References.checkUsagePermissions;
+import static projekt.substratum.common.References.homeFragment;
 import static projekt.substratum.common.References.isSamsung;
 import static projekt.substratum.common.commands.FileOperations.delete;
 
@@ -142,6 +143,8 @@ public class MainActivity extends SubstratumActivity implements
     private LocalBroadcastManager localBroadcastManager;
     private KillReceiver killReceiver;
 
+    MenuItem menuitem;
+
     public void switchToCustomToolbar(String title, String content) {
         if (supportActionBar != null) supportActionBar.setTitle("");
         if (actionbar_content != null) actionbar_content.setVisibility(View.VISIBLE);
@@ -158,44 +161,6 @@ public class MainActivity extends SubstratumActivity implements
         } catch (NullPointerException npe) {
             // At this point, the activity is closing!
         }
-    }
-
-    private void switchFragment(String title, String fragment) {
-        if (searchView != null) {
-            if (!searchView.isIconified()) {
-                searchView.setIconified(true);
-            }
-        }
-        switchToStockToolbar(title);
-        FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
-        tx.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
-        tx.replace(R.id.main, Fragment.instantiate(
-                MainActivity.this,
-                fragment));
-        tx.commit();
-        hideBundle = true;
-        hideRestartUi = !title.equals(getString(R.string.nav_overlay_manager));
-        supportInvalidateOptionsMenu();
-    }
-
-    private void switchThemeFragment(String title, String home_type) {
-        if (searchView != null && !searchView.isIconified()) {
-            searchView.setIconified(true);
-        }
-        Fragment fragment = new ThemeFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString("home_type", home_type);
-        bundle.putString("title", title);
-        fragment.setArguments(bundle);
-
-        switchToStockToolbar(title);
-        FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
-        tx.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
-        tx.replace(R.id.main, fragment);
-        tx.commit();
-        hideBundle = false;
-        hideRestartUi = true;
-        supportInvalidateOptionsMenu();
     }
 
     private void switchFragmentToLicenses(String title, LibsSupportFragment fragment) {
@@ -267,6 +232,85 @@ public class MainActivity extends SubstratumActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.main_activity);
+
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        final BottomNavigationView mBottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
+        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+        }
+
+        TabPagerAdapter tabAdapter = new TabPagerAdapter(getSupportFragmentManager());
+
+        Overlays overlays = new Overlays();
+        ManagerFragment manage = new ManagerFragment();
+        PriorityListFragment priority = new PriorityListFragment();
+        RecoveryFragment recovery = new RecoveryFragment();
+        SettingsFragment settings = new SettingsFragment();
+
+        tabAdapter.addFragments(overlays);
+        tabAdapter.addFragments(manage);
+        tabAdapter.addFragments(priority);
+        tabAdapter.addFragments(recovery);
+        tabAdapter.addFragments(settings);
+        viewPager.setAdapter(tabAdapter);
+
+        launchHome();
+
+        mBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.tab_overlays:
+                        viewPager.setCurrentItem(0);
+                        return true;
+                    case R.id.tab_manage:
+                        viewPager.setCurrentItem(1);
+                        return true;
+                    case R.id.tab_priorities:
+                        viewPager.setCurrentItem(2);
+                        return true;
+                    case R.id.tab_recovery:
+                        viewPager.setCurrentItem(3);
+                        return true;
+                    case R.id.tab_settings:
+                        viewPager.setCurrentItem(4);
+                        return true;
+                }
+                return false;
+            }
+        });
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if(menuitem != null) {
+                    menuitem.setChecked(false);
+                } else {
+                    mBottomNavigationView.getMenu().getItem(0).setChecked(false);
+                }
+                mBottomNavigationView.getMenu().getItem(position).setChecked(true);
+                menuitem = mBottomNavigationView.getMenu().getItem(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
+
+    }
+
+    private void launchHome() {
+        Fragment newFragment;
+        newFragment = new Overlays();
+        getSupportFragmentManager().beginTransaction().replace(R.id.main, newFragment).commit();
         if (BuildConfig.DEBUG && !References.isSamsung(getApplicationContext())) {
             Log.d(SUBSTRATUM_LOG, "Substratum launched with debug mode signatures.");
             if (LeakCanary.isInAnalyzerProcess(this)) return;
@@ -274,135 +318,6 @@ public class MainActivity extends SubstratumActivity implements
             Log.d(SUBSTRATUM_LOG,
                     "LeakCanary has been initialized to actively monitor memory leaks.");
         }
-        setContentView(R.layout.main_activity);
-        cleanLogCharReportsIfNecessary();
-
-        int selectedDrawer = 1;
-        if (savedInstanceState != null) {
-            selectedDrawer = savedInstanceState.getInt(SELECTED_DRAWER_ITEM);
-        }
-
-        // Register the main app receiver to auto kill the activity
-        killReceiver = new KillReceiver();
-        IntentFilter filter = new IntentFilter("MainActivity.KILL");
-        localBroadcastManager = LocalBroadcastManager.getInstance(getApplicationContext());
-        localBroadcastManager.registerReceiver(killReceiver, filter);
-
-        prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-
-        actionbar_title = findViewById(R.id.activity_title);
-        actionbar_content = findViewById(R.id.theme_count);
-
-        References.setROMVersion(getApplicationContext(), false);
-        References.setAndCheckOMS(getApplicationContext());
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        if (toolbar != null) {
-            setSupportActionBar(toolbar);
-            if (getSupportActionBar() != null) {
-                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                getSupportActionBar().setHomeButtonEnabled(false);
-                getSupportActionBar().setTitle("");
-            }
-        }
-        supportActionBar = getSupportActionBar();
-        switchToStockToolbar(getString(R.string.app_name));
-
-        String versionName = BuildConfig.VERSION_NAME;
-        if (BuildConfig.DEBUG) {
-            versionName = versionName;
-        }
-
-        AccountHeader header = new AccountHeaderBuilder()
-                .withActivity(this)
-                .withHeaderBackground(R.drawable.material_drawer_header_background)
-                .withProfileImagesVisible(false)
-                .withSelectionListEnabledForSingleProfile(false)
-                .addProfiles(
-                        new ProfileDrawerItem()
-                                .withName(getString(R.string.drawer_name))
-                                .withEmail(versionName))
-                .withCurrentProfileHiddenInList(true)
-                .build();
-
-        //LibsConfiguration.getInstance().setItemAnimator(new SlideDownAlphaAnimator());
-        final LibsSupportFragment fragment = new LibsBuilder().supportFragment();
-
-        DrawerBuilder drawerBuilder = new DrawerBuilder();
-        drawerBuilder.withActivity(this);
-
-        if (toolbar != null) drawerBuilder.withToolbar(toolbar);
-        drawerBuilder.withSavedInstance(savedInstanceState);
-        drawerBuilder.withActionBarDrawerToggleAnimated(true);
-        if (prefs.getBoolean("alternate_drawer_design", false)) {
-            drawerBuilder.withRootView(R.id.drawer_container);
-            drawerBuilder.withHeaderHeight(DimenHolder.fromDp(0));
-        }
-        drawerBuilder.withAccountHeader(header);
-
-        // Begin initializing the navigation drawer
-        Boolean checkSamsungStatus = isSamsung(getApplicationContext());
-        drawerBuilder.addDrawerItems(
-                new PrimaryDrawerItem()
-                        .withName(R.string.nav_overlays)
-                        .withIcon(R.drawable.nav_overlays)
-                        .withIdentifier(1));
-        drawerBuilder.addDrawerItems(
-                new PrimaryDrawerItem()
-                        .withName(R.string.nav_overlay_manager)
-                        .withIcon(R.drawable.nav_overlay_manager)
-                        .withIdentifier(2));
-        if (References.checkOMS(getApplicationContext()) && !checkSamsungStatus)
-            drawerBuilder.addDrawerItems(
-                    new PrimaryDrawerItem()
-                            .withName(R.string.nav_priorities)
-                            .withIcon(R.drawable.nav_drawer_priorities)
-                            .withIdentifier(3));
-        drawerBuilder.addDrawerItems(
-                new PrimaryDrawerItem()
-                        .withName(R.string.nav_manage)
-                        .withIcon(R.drawable.nav_manage)
-                        .withIdentifier(4));
-        drawerBuilder.addDrawerItems(
-                new SecondaryDrawerItem()
-                        .withName(R.string.nav_settings)
-                        .withIcon(R.drawable.nav_drawer_settings)
-                        .withIdentifier(5));
-        drawerBuilder.withOnDrawerItemClickListener((view, position, drawerItem) -> {
-            if (drawerItem != null) {
-                switch ((int) drawerItem.getIdentifier()) {
-                    case 1:
-                        switchThemeFragment(((References.checkOMS(
-                                getApplicationContext()) ?
-                                        getString(R.string.app_name) :
-                                        (References.isSamsung(getApplicationContext()) ?
-                                                getString(R.string.samsung_app_name) :
-                                                getString(R.string.legacy_app_name)))
-                                ),
-                                References.homeFragment);
-                        break;
-                    case 2:
-                        switchFragment(getString(R.string.nav_overlay_manager),
-                                ManagerFragment.class.getCanonicalName());
-                        break;
-                    case 3:
-                        switchFragment(getString(R.string.nav_priorities),
-                                PriorityLoaderFragment.class.getCanonicalName());
-                        break;
-                    case 4:
-                        switchFragment(getString(R.string.nav_manage),
-                                RecoveryFragment.class.getCanonicalName());
-                        break;
-                    case 5:
-                        switchFragment(getString(R.string.nav_settings),
-                                SettingsFragment.class.getCanonicalName());
-                        break;
-                }
-            }
-            return false;
-        });
-        drawer = drawerBuilder.build();
-        drawer.setSelection(selectedDrawer, true);
 
         permissionCheck = ContextCompat.checkSelfPermission(
                 getApplicationContext(),
@@ -583,10 +498,6 @@ public class MainActivity extends SubstratumActivity implements
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
-                return true;
-            case R.id.search:
-                Intent intent = new Intent(this, ShowcaseActivity.class);
-                startActivity(intent);
                 return true;
 
             // Begin OMS based options

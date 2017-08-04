@@ -163,6 +163,44 @@ public class MainActivity extends SubstratumActivity implements
         }
     }
 
+    private void switchFragment(String title, String fragment) {
+        if (searchView != null) {
+            if (!searchView.isIconified()) {
+                searchView.setIconified(true);
+            }
+        }
+        switchToStockToolbar(title);
+        FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
+        tx.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+        tx.replace(R.id.main, Fragment.instantiate(
+                MainActivity.this,
+                fragment));
+        tx.commit();
+        hideBundle = true;
+        hideRestartUi = !title.equals(getString(R.string.nav_overlay_manager));
+        supportInvalidateOptionsMenu();
+    }
+
+    private void switchThemeFragment(String title, String home_type) {
+        if (searchView != null && !searchView.isIconified()) {
+            searchView.setIconified(true);
+        }
+        Fragment fragment = new ThemeFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("home_type", home_type);
+        bundle.putString("title", title);
+        fragment.setArguments(bundle);
+
+        switchToStockToolbar(title);
+        FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
+        tx.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+        tx.replace(R.id.main, fragment);
+        tx.commit();
+        hideBundle = false;
+        hideRestartUi = true;
+        supportInvalidateOptionsMenu();
+    }
+
     private void switchFragmentToLicenses(String title, LibsSupportFragment fragment) {
         if (searchView != null && !searchView.isIconified()) {
             searchView.setIconified(true);
@@ -233,15 +271,31 @@ public class MainActivity extends SubstratumActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Register the main app receiver to auto kill the activity
+        killReceiver = new KillReceiver();
+        IntentFilter filter = new IntentFilter("MainActivity.KILL");
+        localBroadcastManager = LocalBroadcastManager.getInstance(getApplicationContext());
+        localBroadcastManager.registerReceiver(killReceiver, filter);
+
+        prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+        actionbar_title = findViewById(R.id.activity_title);
+        actionbar_content = findViewById(R.id.theme_count);
+
         setContentView(R.layout.main_activity);
 
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         final BottomNavigationView mBottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
-        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
 
         if (toolbar != null) {
             setSupportActionBar(toolbar);
+			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeButtonEnabled(false);
+            getSupportActionBar().setTitle("");
         }
+		
+		supportActionBar = getSupportActionBar();
+        switchToStockToolbar(getString(R.string.app_name));
 
         TabPagerAdapter tabAdapter = new TabPagerAdapter(getSupportFragmentManager());
 
@@ -256,55 +310,43 @@ public class MainActivity extends SubstratumActivity implements
         tabAdapter.addFragments(priority);
         tabAdapter.addFragments(recovery);
         tabAdapter.addFragments(settings);
-        viewPager.setAdapter(tabAdapter);
 
         launchHome();
 
         mBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
+				switch (item.getItemId()) {
                     case R.id.tab_overlays:
-                        viewPager.setCurrentItem(0);
+                        switchThemeFragment(((References.checkOMS(
+                                getApplicationContext()) ?
+                                        getString(R.string.app_name) :
+                                        (References.isSamsung(getApplicationContext()) ?
+                                                getString(R.string.samsung_app_name) :
+                                                getString(R.string.legacy_app_name)))
+                                ),
+                                References.homeFragment);
                         return true;
                     case R.id.tab_manage:
-                        viewPager.setCurrentItem(1);
+                        switchFragment(getString(R.string.nav_overlay_manager),
+                                ManagerFragment.class.getCanonicalName());
                         return true;
                     case R.id.tab_priorities:
-                        viewPager.setCurrentItem(2);
+                        switchFragment(getString(R.string.nav_priorities),
+                                PriorityLoaderFragment.class.getCanonicalName());
                         return true;
                     case R.id.tab_recovery:
-                        viewPager.setCurrentItem(3);
+                        switchFragment(getString(R.string.nav_manage),
+                                RecoveryFragment.class.getCanonicalName());
                         return true;
                     case R.id.tab_settings:
-                        viewPager.setCurrentItem(4);
+                        switchFragment(getString(R.string.nav_settings),
+                                SettingsFragment.class.getCanonicalName());
                         return true;
                 }
                 return false;
             }
         });
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                if(menuitem != null) {
-                    menuitem.setChecked(false);
-                } else {
-                    mBottomNavigationView.getMenu().getItem(0).setChecked(false);
-                }
-                mBottomNavigationView.getMenu().getItem(position).setChecked(true);
-                menuitem = mBottomNavigationView.getMenu().getItem(position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-            }
-        });
-
     }
 
     private void launchHome() {

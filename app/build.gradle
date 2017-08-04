@@ -38,7 +38,7 @@ android {
 
     android.applicationVariants.all { variant ->
         variant.outputs.all {
-            outputFileName = "diverge ${variant.versionName}.apk"
+            outputFileName = "Diverge ${variant.versionName}.apk"
         }
     }
 
@@ -47,7 +47,7 @@ android {
         minSdkVersion 24
         targetSdkVersion 26
         versionCode 815
-        versionName "Beta Twelve"
+        versionName "Beta Thirteen"
         buildConfigField "java.util.Date", "buildTime", "new java.util.Date(" + System.currentTimeMillis() + "L)"
         buildConfigField "String", "GIT_HASH", "\"${gitHash()}\""
     }

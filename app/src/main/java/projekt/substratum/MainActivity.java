@@ -97,7 +97,6 @@ import projekt.substratum.common.platform.ThemeManager;
 import projekt.substratum.fragments.ManagerFragment;
 import projekt.substratum.fragments.PriorityListFragment;
 import projekt.substratum.fragments.PriorityLoaderFragment;
-import projekt.substratum.fragments.ProfileFragment;
 import projekt.substratum.fragments.RecoveryFragment;
 import projekt.substratum.fragments.SettingsFragment;
 import projekt.substratum.fragments.TeamFragment;
@@ -345,59 +344,25 @@ public class MainActivity extends SubstratumActivity implements
                         .withIdentifier(1));
         drawerBuilder.addDrawerItems(
                 new PrimaryDrawerItem()
-                        .withName(R.string.nav_overlays)
-                        .withIcon(R.drawable.nav_overlays)
-                        .withIdentifier(2));
-        if (!checkSamsungStatus) drawerBuilder.addDrawerItems(
-                new PrimaryDrawerItem()
-                        .withName(R.string.nav_bootanim)
-                        .withIcon(R.drawable.nav_bootanim)
-                        .withIdentifier(3));
-        if (References.isFontsSupported() && !checkSamsungStatus)
-            drawerBuilder.addDrawerItems(
-                    new PrimaryDrawerItem()
-                            .withName(R.string.nav_fonts)
-                            .withIcon(R.drawable.nav_fonts)
-                            .withIdentifier(4));
-        if (!checkSamsungStatus) drawerBuilder.addDrawerItems(
-                new PrimaryDrawerItem()
-                        .withName(R.string.nav_sounds)
-                        .withIcon(R.drawable.nav_sounds)
-                        .withIdentifier(5));
-        drawerBuilder.addDrawerItems(
-                new PrimaryDrawerItem()
-                        .withName(R.string.nav_wallpapers)
-                        .withIcon(R.drawable.nav_wallpapers)
-                        .withIdentifier(6));
-        drawerBuilder.addDrawerItems(
-                new SectionDrawerItem()
-                        .withName(R.string.nav_section_header_utilities));
-        drawerBuilder.addDrawerItems(
-                new PrimaryDrawerItem()
                         .withName(R.string.nav_overlay_manager)
                         .withIcon(R.drawable.nav_overlay_manager)
-                        .withIdentifier(7));
+                        .withIdentifier(2));
         if (References.checkOMS(getApplicationContext()) && !checkSamsungStatus)
             drawerBuilder.addDrawerItems(
                     new PrimaryDrawerItem()
                             .withName(R.string.nav_priorities)
                             .withIcon(R.drawable.nav_drawer_priorities)
-                            .withIdentifier(8));
-        if (!checkSamsungStatus) drawerBuilder.addDrawerItems(
-                new PrimaryDrawerItem()
-                        .withName(R.string.nav_backup_restore)
-                        .withIcon(R.drawable.nav_drawer_profiles)
-                        .withIdentifier(9));
+                            .withIdentifier(3));
         drawerBuilder.addDrawerItems(
                 new PrimaryDrawerItem()
                         .withName(R.string.nav_manage)
                         .withIcon(R.drawable.nav_manage)
-                        .withIdentifier(10));
+                        .withIdentifier(4));
         drawerBuilder.addDrawerItems(
                 new SecondaryDrawerItem()
                         .withName(R.string.nav_settings)
                         .withIcon(R.drawable.nav_drawer_settings)
-                        .withIdentifier(11));
+                        .withIdentifier(5));
         drawerBuilder.withOnDrawerItemClickListener((view, position, drawerItem) -> {
             if (drawerItem != null) {
                 switch ((int) drawerItem.getIdentifier()) {
@@ -412,42 +377,18 @@ public class MainActivity extends SubstratumActivity implements
                                 References.homeFragment);
                         break;
                     case 2:
-                        switchThemeFragment(getString(R.string.nav_overlays),
-                                References.overlaysFragment);
-                        break;
-                    case 3:
-                        switchThemeFragment(getString(R.string.nav_bootanim),
-                                References.bootAnimationsFragment);
-                        break;
-                    case 4:
-                        switchThemeFragment(getString(R.string.nav_fonts),
-                                References.fontsFragment);
-                        break;
-                    case 5:
-                        switchThemeFragment(getString(R.string.nav_sounds),
-                                References.soundsFragment);
-                        break;
-                    case 6:
-                        switchThemeFragment(getString(R.string.nav_wallpapers),
-                                References.wallpaperFragment);
-                        break;
-                    case 7:
                         switchFragment(getString(R.string.nav_overlay_manager),
                                 ManagerFragment.class.getCanonicalName());
                         break;
-                    case 8:
+                    case 3:
                         switchFragment(getString(R.string.nav_priorities),
                                 PriorityLoaderFragment.class.getCanonicalName());
                         break;
-                    case 9:
-                        switchFragment(getString(R.string.nav_backup_restore),
-                                ProfileFragment.class.getCanonicalName());
-                        break;
-                    case 10:
+                    case 4:
                         switchFragment(getString(R.string.nav_manage),
                                 RecoveryFragment.class.getCanonicalName());
                         break;
-                    case 11:
+                    case 5:
                         switchFragment(getString(R.string.nav_settings),
                                 SettingsFragment.class.getCanonicalName());
                         break;

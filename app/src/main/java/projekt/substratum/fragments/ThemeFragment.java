@@ -49,7 +49,6 @@ import java.util.TreeMap;
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 import projekt.substratum.MainActivity;
 import projekt.substratum.R;
-import projekt.substratum.activities.showcase.ShowcaseActivity;
 import projekt.substratum.adapters.fragments.themes.ThemeAdapter;
 import projekt.substratum.adapters.fragments.themes.ThemeItem;
 import projekt.substratum.common.References;
@@ -117,11 +116,6 @@ public class ThemeFragment extends Fragment {
         substratum_packages = new HashMap<>();
         recyclerView = root.findViewById(R.id.theme_list);
         cardView = root.findViewById(R.id.no_entry_card_view);
-        cardView.setOnClickListener(v -> {
-                    Intent intent = new Intent(getActivity(), ShowcaseActivity.class);
-                    startActivity(intent);
-                }
-        );
         cardView.setVisibility(View.GONE);
         cardViewText = cardView.findViewById(R.id.no_themes_description);
         cardViewImage = cardView.findViewById(R.id.no_themes_installed);

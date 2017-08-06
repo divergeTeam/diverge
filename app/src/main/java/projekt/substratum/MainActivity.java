@@ -388,7 +388,7 @@ public class MainActivity extends SubstratumActivity implements
                         switchFragment(getString(R.string.nav_manage),
                                 RecoveryFragment.class.getCanonicalName());
                         break;
-                    case 5:
+                    case 10:
                         switchFragment(getString(R.string.nav_settings),
                                 SettingsFragment.class.getCanonicalName());
                         break;

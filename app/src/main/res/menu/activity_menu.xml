@@ -20,6 +20,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/actionbar_search"
+        android:title="@string/actionbar_search"
+        app:actionViewClass="android.support.v7.widget.SearchView" />
+    <item
         android:id="@+id/restart_systemui"
         android:icon="@drawable/toolbar_refresh"
         android:menuCategory="secondary"

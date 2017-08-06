@@ -42,7 +42,7 @@ android {
 
     android.applicationVariants.all { variant ->
         variant.outputs.all {
-            outputFileName = "Diverge ${variant.versionCode}.apk"
+            outputFileName = "Diverge ${variant.versionName}.apk"
         }
     }
 

@@ -461,8 +461,9 @@ public class ThemeManager {
             ThemeInterfacerService.uninstallOverlays(
                     context,
                     overlays,
-                    shouldRestartUi);
+                    !bypassRestart && shouldRestartUI(context, overlays));
         } else if (References.isSamsung(context)) {
+            // TODO: Needs verifying this works with multiple APKs
             for (int i = 0; i < overlays.size(); i++) {
                 Uri packageURI = Uri.parse("package:" + overlays.get(i));
                 Intent uninstallIntent = new Intent(Intent.ACTION_DELETE, packageURI);

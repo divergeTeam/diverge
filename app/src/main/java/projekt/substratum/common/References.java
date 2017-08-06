@@ -179,10 +179,6 @@ public class References {
     public static final String metadataOverlayType2 = "Substratum_Type2";
     public static final String metadataOverlayType3 = "Substratum_Type3";
     public static final String metadataOverlayVersion = "Substratum_Version";
-    // These are Samsung specific manifest values
-    public static final Boolean toggleShowSamsungOverlayInSettings = false;
-    public static final String permissionSamsungOverlay =
-            "com.samsung.android.permission.SAMSUNG_OVERLAY_COMPONENT";
     // These strings control the nav drawer filter for ThemeFragment
     public static final String homeFragment = "";
     public static final String overlaysFragment = "overlays";
@@ -690,7 +686,7 @@ public class References {
         editor.putBoolean("theme_updater", false);
         editor.putBoolean("show_dangerous_samsung_overlays", false);
         editor.putBoolean("autosave_logchar", true);
-        editor.putBoolean("automatic_logchar_cleanup", false);
+        editor.putBoolean("automatic_logchar_cleanup",false);
         editor.remove("display_old_themes");
         editor.remove("seen_restore_warning");
         editor.remove("previous_logchar_cleanup");

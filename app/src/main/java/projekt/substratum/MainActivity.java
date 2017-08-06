@@ -394,28 +394,10 @@ public class MainActivity extends SubstratumActivity implements
                         .withIcon(R.drawable.nav_manage)
                         .withIdentifier(10));
         drawerBuilder.addDrawerItems(
-                new SectionDrawerItem()
-                        .withName(R.string.nav_section_header_more));
-        drawerBuilder.addDrawerItems(
-                new PrimaryDrawerItem()
-                        .withName(R.string.nav_troubleshooting)
-                        .withIcon(R.drawable.nav_troubleshooting)
-                        .withIdentifier(11));
-        drawerBuilder.addDrawerItems(
-                new SecondaryDrawerItem()
-                        .withName(R.string.nav_team_contributors)
-                        .withIcon(R.drawable.nav_drawer_team)
-                        .withIdentifier(12));
-        drawerBuilder.addDrawerItems(
-                new SecondaryDrawerItem()
-                        .withName(getString(R.string.nav_opensource))
-                        .withIcon(R.drawable.nav_drawer_licenses)
-                        .withIdentifier(13));
-        drawerBuilder.addDrawerItems(
                 new SecondaryDrawerItem()
                         .withName(R.string.nav_settings)
                         .withIcon(R.drawable.nav_drawer_settings)
-                        .withIdentifier(14));
+                        .withIdentifier(11));
         drawerBuilder.withOnDrawerItemClickListener((view, position, drawerItem) -> {
             if (drawerItem != null) {
                 switch ((int) drawerItem.getIdentifier()) {
@@ -466,18 +448,6 @@ public class MainActivity extends SubstratumActivity implements
                                 RecoveryFragment.class.getCanonicalName());
                         break;
                     case 11:
-                        switchFragment(getString(R.string.nav_troubleshooting),
-                                TroubleshootingFragment.class.getCanonicalName());
-                        break;
-                    case 12:
-                        switchFragment(getString(R.string.nav_team_contributors),
-                                TeamFragment.class.getCanonicalName());
-                        break;
-                    case 13:
-                        switchFragmentToLicenses(getString(R.string.nav_opensource),
-                                fragment);
-                        break;
-                    case 14:
                         switchFragment(getString(R.string.nav_settings),
                                 SettingsFragment.class.getCanonicalName());
                         break;

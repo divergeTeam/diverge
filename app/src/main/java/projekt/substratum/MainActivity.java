@@ -330,7 +330,6 @@ public class MainActivity extends SubstratumActivity implements
         drawerBuilder.withSavedInstance(savedInstanceState);
         drawerBuilder.withActionBarDrawerToggleAnimated(true);
         if (prefs.getBoolean("alternate_drawer_design", false)) {
-            drawerBuilder.withRootView(R.id.drawer_container);
             drawerBuilder.withHeaderHeight(DimenHolder.fromDp(0));
         }
         drawerBuilder.withAccountHeader(header);

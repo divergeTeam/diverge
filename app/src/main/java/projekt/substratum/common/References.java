@@ -689,7 +689,6 @@ public class References {
         editor.putBoolean("overlay_alert", false);
         editor.putBoolean("overlay_updater", false);
         editor.putBoolean("theme_updater", false);
-        editor.putBoolean("show_dangerous_samsung_overlays", false);
         editor.putBoolean("autosave_logchar", true);
         editor.putBoolean("automatic_logchar_cleanup",false);
         editor.remove("display_old_themes");

@@ -359,7 +359,7 @@ public class MainActivity extends SubstratumActivity implements
                         .withIcon(R.drawable.nav_manage)
                         .withIdentifier(4));
         drawerBuilder.addDrawerItems(
-                new SecondaryDrawerItem()
+                new PrimaryDrawerItem()
                         .withName(R.string.nav_settings)
                         .withIcon(R.drawable.nav_drawer_settings)
                         .withIdentifier(5));
@@ -388,7 +388,7 @@ public class MainActivity extends SubstratumActivity implements
                         switchFragment(getString(R.string.nav_manage),
                                 RecoveryFragment.class.getCanonicalName());
                         break;
-                    case 10:
+                    case 5:
                         switchFragment(getString(R.string.nav_settings),
                                 SettingsFragment.class.getCanonicalName());
                         break;

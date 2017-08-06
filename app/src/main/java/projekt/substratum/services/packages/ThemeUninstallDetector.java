@@ -44,7 +44,6 @@ import projekt.substratum.common.tabs.SoundManager;
 import projekt.substratum.common.tabs.WallpaperManager;
 
 import static projekt.substratum.common.References.PACKAGE_FULLY_REMOVED;
-import static projekt.substratum.common.References.SST_ADDON_PACKAGE;
 import static projekt.substratum.common.References.SUBSTRATUM_BUILDER_CACHE;
 import static projekt.substratum.common.References.metadataOverlayParent;
 
@@ -61,13 +60,6 @@ public class ThemeUninstallDetector extends BroadcastReceiver {
                 package_name = packageName.toString().substring(8);
             } else {
                 return;
-            }
-
-            if (package_name.equals(SST_ADDON_PACKAGE)) {
-                SharedPreferences prefs =
-                        context.getSharedPreferences("substratum_state", Context.MODE_PRIVATE);
-                prefs.edit().clear().apply();
-                References.sendKillMessage(context);
             }
 
             if (!package_name.endsWith(".icon")) References.sendRefreshManagerMessage(context);

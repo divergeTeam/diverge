@@ -25,12 +25,10 @@ import android.app.AlertDialog;
 import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
@@ -50,7 +48,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
@@ -138,8 +135,6 @@ public class MainActivity extends SubstratumActivity implements
     private ProgressDialog mProgressDialog;
     private SharedPreferences prefs;
     private boolean hideBundle, hideRestartUi;
-    private LocalBroadcastManager localBroadcastManager;
-    private KillReceiver killReceiver;
 
     public void switchToCustomToolbar(String title, String content) {
         if (supportActionBar != null) supportActionBar.setTitle("");
@@ -254,16 +249,6 @@ public class MainActivity extends SubstratumActivity implements
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        try {
-            localBroadcastManager.unregisterReceiver(killReceiver);
-        } catch (IllegalArgumentException e) {
-            // Unregistered already
-        }
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (BuildConfig.DEBUG && !References.isSamsung(getApplicationContext())) {
@@ -280,12 +265,6 @@ public class MainActivity extends SubstratumActivity implements
         if (savedInstanceState != null) {
             selectedDrawer = savedInstanceState.getInt(SELECTED_DRAWER_ITEM);
         }
-
-        // Register the main app receiver to auto kill the activity
-        killReceiver = new KillReceiver();
-        IntentFilter filter = new IntentFilter("MainActivity.KILL");
-        localBroadcastManager = LocalBroadcastManager.getInstance(getApplicationContext());
-        localBroadcastManager.registerReceiver(killReceiver, filter);
 
         References.selfDisabler(getApplicationContext());
 

@@ -488,12 +488,9 @@ public class MainActivity extends SubstratumActivity implements
                 switch ((int) drawerItem.getIdentifier()) {
                     case 1:
                         switchThemeFragment(((References.checkOMS(
-                                getApplicationContext()) ?
+                                getApplicationContext())) ?
                                         getString(R.string.app_name) :
-                                        (References.isSamsung(getApplicationContext()) ?
-                                                getString(R.string.samsung_app_name) :
-                                                getString(R.string.legacy_app_name)))
-                                ),
+                                        getString(R.string.legacy_app_name)),
                                 References.homeFragment);
                         break;
                     case 2:

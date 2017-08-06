@@ -311,9 +311,9 @@ class OverlayFunctions {
                     fragment.late_install != null &&
                     fragment.late_install.size() > 0) {
                 if (Root.checkRootAccess() && Root.requestRootAccess()) {
-                    fragment.progressBar.setVisibility(View.VISIBLE);
-                    fragment.overlaysWaiting = fragment.late_install.size();
+                    Log.e("Tester3", "Late Install");
                     for (int i = 0; i < fragment.late_install.size(); i++) {
+                        Log.e("Tester3", fragment.late_install.get(i));
                         ThemeManager.installOverlay(
                                 fragment.getContext(),
                                 fragment.late_install.get(i));

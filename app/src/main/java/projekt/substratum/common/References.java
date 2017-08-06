@@ -159,7 +159,6 @@ public class References {
     public static final String TEMPLATE_GET_KEYS = "projekt.substratum.GET_KEYS";
     // Keep it simple, stupid!
     public static final int HIDDEN_CACHING_MODE_TAP_COUNT = 7;
-    public static final int SHOWCASE_SHUFFLE_COUNT = 5;
     // Delays for Icon Pack Handling
     public static final int MAIN_WINDOW_REFRESH_DELAY = 2000;
     public static final int FIRST_WINDOW_REFRESH_DELAY = 1000;
@@ -192,13 +191,6 @@ public class References {
     public static final String fontsFragment = "fonts";
     public static final String soundsFragment = "audio";
     public static final String wallpaperFragment = "wallpapers";
-    // These strings control the showcase metadata parsing
-    public static final String paidTheme = "paid";
-    public static final String showcaseFonts = "fonts";
-    public static final String showcaseWallpapers = "wallpapers";
-    public static final String showcaseBootanimations = "bootanimations";
-    public static final String showcaseOverlays = "overlays";
-    public static final String showcaseSounds = "sounds";
     // These strings control the directories that Substratum uses
     public static final String EXTERNAL_STORAGE_CACHE = "/.substratum/";
     public static final String SUBSTRATUM_BUILDER_CACHE = "/SubstratumBuilder/";
@@ -681,7 +673,6 @@ public class References {
         editor.putBoolean("theme_debug", false);
         editor.putBoolean("force_english", false);
         editor.putBoolean("floatui_show_android_system_overlays", false);
-        editor.putBoolean("alphabetize_showcase", false);
         editor.putBoolean("complexion", true);
         editor.putString("compiler", "aapt");
         editor.putBoolean("crash_receiver", true);

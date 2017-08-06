@@ -90,7 +90,6 @@ import java.util.concurrent.TimeUnit;
 import eightbitlab.com.blurview.BlurView;
 import eightbitlab.com.blurview.RenderScriptBlur;
 import projekt.substratum.activities.base.SubstratumActivity;
-import projekt.substratum.activities.showcase.ShowcaseActivity;
 import projekt.substratum.common.References;
 import projekt.substratum.common.commands.ElevatedCommands;
 import projekt.substratum.common.commands.FileOperations;
@@ -668,10 +667,6 @@ public class MainActivity extends SubstratumActivity implements
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
-                return true;
-            case R.id.search:
-                Intent intent = new Intent(this, ShowcaseActivity.class);
-                startActivity(intent);
                 return true;
 
             // Begin OMS based options

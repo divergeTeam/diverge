@@ -131,8 +131,6 @@ public class References {
     public static final Boolean ENABLE_DIRECT_ASSETS_LOGGING = false; // Self explanatory
     public static final Boolean BYPASS_ALL_VERSION_CHECKS = false; // For developer previews only!
     public static final Boolean BYPASS_SUBSTRATUM_BUILDER_DELETION = false; // Do not delete cache?
-    @SuppressWarnings("WeakerAccess")
-    public static final Boolean FORCE_SAMSUNG_VARIANT = false; // Debugging on a non-Samsung device
     // These are specific log tags for different classes
     public static final String SUBSTRATUM_BUILDER = "SubstratumBuilder";
     public static final String SUBSTRATUM_LOG = "SubstratumLogger";
@@ -210,6 +208,7 @@ public class References {
     // Notification Channel
     public static final String DEFAULT_NOTIFICATION_CHANNEL_ID = "default";
     public static final String ONGOING_NOTIFICATION_CHANNEL_ID = "ongoing";
+    private static final Boolean FORCE_SAMSUNG_VARIANT = false; // Debugging on a non-Samsung device
     private static final String TEMPLATE_RECEIVE_KEYS = "projekt.substratum.RECEIVE_KEYS";
     private static final String metadataSamsungSupport = "Substratum_Samsung";
     // This controls the filter used by the post-6.0.0 template checker
@@ -905,23 +904,7 @@ public class References {
         }
         return returnArray;
     }
-
-    // Run shell command and return a StringBuilder of the output
-    @SuppressWarnings("SameParameterValue")
-    public static StringBuilder runShellCommand(String input) {
-        try {
-            Process shell = Runtime.getRuntime().exec(input);
-            BufferedReader reader =
-                    new BufferedReader(new InputStreamReader(shell.getInputStream()));
-
-            StringBuilder returnString = new StringBuilder();
-            String line;
-            while ((line = reader.readLine()) != null) {
-                returnString.append(line).append("\n");
-            }
-            return returnString;
-        } catch (Exception e) {
-            // Suppress warning
+	
         }
         return null;
     }

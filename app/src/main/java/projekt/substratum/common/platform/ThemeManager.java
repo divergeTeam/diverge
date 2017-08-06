@@ -462,9 +462,7 @@ public class ThemeManager {
                     context,
                     overlays,
                     shouldRestartUi);
-        } else if (References.isSamsung(context) &&
-                !Root.checkRootAccess() &&
-                !Root.requestRootAccess()) {
+        } else if (References.isSamsung(context)) {
             for (int i = 0; i < overlays.size(); i++) {
                 Uri packageURI = Uri.parse("package:" + overlays.get(i));
                 Intent uninstallIntent = new Intent(Intent.ACTION_DELETE, packageURI);

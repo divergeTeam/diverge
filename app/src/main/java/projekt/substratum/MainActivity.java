@@ -862,7 +862,7 @@ public class MainActivity extends SubstratumActivity implements
         searchView.setOnQueryTextListener(this);
         searchItem.setVisible(!hideBundle);
         MenuItem restartUi = menu.findItem(R.id.restart_systemui);
-        restartUi.setVisible(!hideRestartUi && (isOMS || Root.checkRootAccess()));
+        restartUi.setVisible(!hideRestartUi && isOMS);
         return true;
     }
 

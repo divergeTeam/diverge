@@ -1260,10 +1260,6 @@ public class MainActivity extends SubstratumActivity implements
                     });
                     titleView.setVisibility(View.GONE);
                     textView.setVisibility(View.GONE);
-                } else if (References.selfDisabler(context)) {
-                    titleView.setText(
-                            activity.getString(R.string.toast_samsung_prototype_disabled));
-                    textView.setVisibility(View.GONE);
                 } else if (References.isPackageInstalled(
                         context, "eu.chainfire.supersu")) {
                     CountDownTimer Count = new CountDownTimer(5000, 1000) {

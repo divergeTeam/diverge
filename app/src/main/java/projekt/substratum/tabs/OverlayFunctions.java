@@ -76,7 +76,6 @@ import static projekt.substratum.common.References.checkThemeInterfacer;
 class OverlayFunctions {
 
     static final String TAG = Overlays.TAG;
-
     static class Phase2_InitializeCache extends AsyncTask<String, Integer, String> {
         private WeakReference<Overlays> ref;
 

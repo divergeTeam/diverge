@@ -397,15 +397,8 @@ public class References {
 
     public static boolean selfDisabler(Context context) {
         if (isPackageInstalled(context, SST_ADDON_PACKAGE)) return false;
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd", Locale.CANADA);
-            Date disabled = DateUtil.addDays(SELF_DISABLER_DATE);
-            String buildTime = sdf.format(disabled.getTime());
-            Date strDate = sdf.parse(buildTime);
-            if (new Date().after(strDate) && isSamsung(context)) return true;
-        } catch (ParseException e) {
-            // Suppress warning
-        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd", Locale.CANADA);
+        if (isSamsung(context)) return true;
         return false;
     }
 
@@ -911,10 +904,6 @@ public class References {
             returnArray.add(themesResolveInfo.get(i).activityInfo.packageName);
         }
         return returnArray;
-    }
-	
-        }
-        return null;
     }
 
     // PackageName Crawling Methods

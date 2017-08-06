@@ -46,7 +46,6 @@ import android.service.notification.StatusBarNotification;
 import android.support.design.widget.Lunchbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.content.FileProvider;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.util.Pair;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -243,6 +242,27 @@ public class Overlays extends Fragment {
                 }
             }
 
+            // TODO: Disable the one overlay checker
+            if (References.isSamsung(getContext())) {
+                if (checkedOverlays.size() > 1) {
+                    Lunchbar.make(
+                            getActivityView(),
+                            R.string.toast_samsung_prototype_one_overlay,
+                            Lunchbar.LENGTH_LONG)
+                            .show();
+                    for (int i = 0; i < overlaysLists.size(); i++) {
+                        OverlaysItem currentOverlay = overlaysLists.get(i);
+                        if (currentOverlay.isSelected()) {
+                            currentOverlay.setSelected(false);
+                        }
+                        mAdapter.notifyDataSetChanged();
+                    }
+                    is_active = false;
+                    compile_enable_mode = false;
+                    return;
+                }
+            }
+
             if (!checkedOverlays.isEmpty()) {
                 OverlayFunctions.Phase2_InitializeCache phase2 = new OverlayFunctions
                         .Phase2_InitializeCache(this);
@@ -323,6 +343,46 @@ public class Overlays extends Fragment {
                     } else {
                         currentOverlay.setSelected(false);
                         mAdapter.notifyDataSetChanged();
+                    }
+                }
+
+                // TODO: Disable the one overlay checker
+                if (References.isSamsung(getContext())) {
+                    if (checkedOverlays.size() > 1) {
+                        Lunchbar.make(
+                                getActivityView(),
+                                R.string.toast_samsung_prototype_one_overlay,
+                                Lunchbar.LENGTH_LONG)
+                                .show();
+                        for (int i = 0; i < overlaysLists.size(); i++) {
+                            OverlaysItem currentOverlay = overlaysLists.get(i);
+                            if (currentOverlay.isSelected()) {
+                                currentOverlay.setSelected(false);
+                            }
+                            mAdapter.notifyDataSetChanged();
+                        }
+
+                        compile_enable_mode = false;
+                        enable_mode = false;
+                        disable_mode = false;
+                        is_active = false;
+                        return;
+                    } else {
+                        // TODO: Do not hardcode to the 0th overlay
+                        if (!References.isPackageInstalled(getContext(),
+                                checkedOverlays.get(0).getFullOverlayParameters())) {
+                            Lunchbar.make(
+                                    getActivityView(),
+                                    R.string.toast_disabled5,
+                                    Lunchbar.LENGTH_LONG)
+                                    .show();
+
+                            compile_enable_mode = false;
+                            enable_mode = false;
+                            disable_mode = false;
+                            is_active = false;
+                            return;
+                        }
                     }
                 }
 
@@ -999,26 +1059,7 @@ public class Overlays extends Fragment {
         switch (requestCode) {
             case 2486:
                 refreshList();
-                FileOperations.delete(getContext(),
-                        new File(late_install.get(0)).getAbsolutePath());
-                if (late_install != null && late_install.size() > 0) late_install.remove(0);
-                if (late_install.size() > 0) {
-                    uninstallMultipleAPKs();
-                }
         }
-    }
-
-    private void uninstallMultipleAPKs() {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        Uri uri = FileProvider.getUriForFile(
-                getContext(),
-                getContext().getApplicationContext().getPackageName() + ".provider",
-                new File(late_install.get(0)));
-        intent.setDataAndType(
-                uri,
-                "application/vnd.android.package-archive");
-        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        startActivityForResult(intent, 2486);
     }
 
     private void refreshList() {

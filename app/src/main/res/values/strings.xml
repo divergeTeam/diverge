@@ -19,7 +19,6 @@
 <resources>
     <string name="app_name" translatable="false">Diverge</string>
     <string name="legacy_app_name" translatable="false">Diverge legacy</string>
-    <string name="samsung_app_name" translatable="false">Diverge samsung</string>
     <string name="debug_app_name" translatable="false">debugger</string>
     <string name="showcase">showcase</string>
     <string name="drawer_name" translatable="false">Diverge</string>

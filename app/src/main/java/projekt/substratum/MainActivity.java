@@ -44,6 +44,7 @@ import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.service.quicksettings.Tile;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.Lunchbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;

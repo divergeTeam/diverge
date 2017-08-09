@@ -248,5 +248,11 @@
             android:summary="@string/alternate_drawer_design_subtext"
             android:title="@string/alternate_drawer_design_title"/>
 
+        <PreferenceScreen
+            android:key="subs_team"
+            android:title="@string/nav_team_contributors"
+            android:fragment="projekt.substratum.fragments.TeamFragment"
+            />
+
     </PreferenceCategory>
 </PreferenceScreen>
